@@ -1,0 +1,271 @@
+#include <bits/stdc++.h>
+#define ull unsigned ll
+#define ll long long int
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define mt make_tuple
+#define nui 100
+#define pi 3.1415926535897932384626
+#define nu 1e18
+#define INF 100000000000
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+#define F1(i,a,n) for(int i=a;i<n;i++)
+#define B(i,a,n) for(ll i=n-1;i>=a;i--)
+#define tc int t;cin>>t;while(t--)
+#define tcf ll t;cin>>t;for(int w=1;w<=t;w++)
+#define Ans(a,b) cout<<"Case #"<<a<<": "<<b<<"\n";
+#define vi vector<int>
+#define vll vector<ll>
+#define pii pair<int,int>
+#define pll pair<ll,ll>
+#define re(a)  a.resize(unique(a.begin(), a.end()) - a.begin());
+#define revsort(a)  is_sorted(begin(a), end(a));
+#define inineg  LLONG_MIN;
+#define NO_OF_CHARS 256
+#define REP(i,n) for (int i = 1; i <= n; i++)
+const int  P1=1000000007;
+#define rep(i,a,b) for(int i = a; i < b; i++)
+#define P 1000000007 
+#define vc vector<int> 
+#define F first
+#define std1 '\n'
+ 
+#define eb emplace_back
+#define rep(i,a,b) for(int i = a; i < b; i++)
+#define ff first
+#define ss second
+
+#define ar array
+#define ld long double
+#define sza(x) ((int)x.size())
+#define all(a) (a).begin(), (a).end()
+
+
+using namespace std;
+
+
+
+vector<ll>v;
+
+
+
+/*int ans(int i,int j)
+{
+    int mini=INT_MAX;
+    if(i>=j)
+    return 0;
+    else if(abs(a[i]-a[j])<=d) return 0;
+    
+    else if(dp[i][j]!=-1)
+        return dp[i][j];
+    else if(abs(a[i]-a[j])>d) 
+    {
+        int d1 = 1+ans(i+1,j);
+        int d2 = 1+ans(i,j-1);
+        
+       mini=min(mini,min(d1,d2));
+       dp[i][j]=mini;
+    }
+         return dp[i][j];
+}*/
+
+bool issquare(ll  x){
+
+
+  ll  y=sqrt(x);
+
+  return y*y==x;
+}
+
+
+void SieveOfEratosthenes(ll  n)
+{
+    
+    bool prime[n + 1];
+    memset(prime, true, sizeof(prime));
+ 
+    for (ll p = 2; p * p <= n; p++)
+    {
+        
+        if (prime[p] == true)
+        {
+            
+            for (ll  i = p * p; i <= n; i += p)
+                prime[i] = false;
+        }
+    }
+ 
+    
+    for (ll  p = 2; p <= n; p++)
+        if (prime[p])
+            v.push_back(p);
+ 
+}
+ 
+
+
+void  find3Numbers(ll A[], ll  arr_size, ll  sum)
+{
+    int l, r;
+ 
+    /* Sort the elements */
+    sort(A, A + arr_size);
+ 
+    /* Now fix the first element one by one and find the
+       other two elements */
+    for (ll i = 0; i < arr_size - 2; i++) {
+ 
+        
+        l = i + 1; 
+ 
+        r = arr_size - 1; 
+        while (l < r) {
+            if (A[i] + A[l] + A[r] == sum) {
+
+               // printf("Triplet is %d, %d, %d", A[i],
+                      // A[l], A[r]);
+               cout<<A[i]<<" "<<A[l]<<" "<<A[r]<<endl;
+
+               break;   
+
+            }
+            else if (A[i] + A[l] + A[r] < sum)
+                l++;
+            else // A[i] + A[l] + A[r] > sum
+                r--;
+        }
+    }
+ 
+   
+}
+
+ll  GcdOfArray(vector<ll>& arr, ll  idx)
+{
+    if (idx == arr.size() - 1) {
+        return arr[idx];
+    }
+    ll  a = arr[idx];
+    ll b = GcdOfArray(arr, idx + 1);
+    return __gcd(a, b); // __gcd(a,b) is inbuilt library function
+}
+
+
+
+
+
+
+
+void solve(){
+
+
+
+int h, w;
+  cin >> h >> w;
+  int dp[h + 1][w + 1];    
+  char grid[h + 1][w + 1]; // # or .
+ 
+  for(int i = 0; i <= h; i++)
+    for(int j = 0; j <= w; j++)
+      dp[i][j] = 0;
+  for(int i = 1; i <= h; i++)
+    for(int j = 1; j <= w; j++)
+      cin >> grid[i][j];
+ 
+  dp[1][1] = 1;
+  for(int i = 1; i <= h; i++)
+  {
+    for(int j = 1; j <= w; j++)
+    {
+      if(grid[i][j] == '#')
+        continue;
+      if(i - 1 >= 1)
+        dp[i][j] = (dp[i][j] + dp[i - 1][j])%mod;
+      if(j - 1 >= 1)
+        dp[i][j] = (dp[i][j] + dp[i][j - 1])%mod;
+    }
+  }
+  cout << dp[h][w] << endl;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+
+
+
+#ifndef ONLINE_JUDGE
+    // for getting input from input.txt
+    freopen("input.txt", "r", stdin);
+    // for writing output to output.txt
+    freopen("output.txt", "w", stdout);
+#endif
+
+  
+   
+
+// ll t;
+ 
+ //cin>>t;
+
+ //SieveOfEratosthenes(1e6);
+
+// while(t--)
+// {
+
+   	solve();
+
+//}
+
+
+// memset(arr1,0,sizeof(arr1));
+ 
+ 
+ 
+ 
+ 
+#ifndef ONLINE_JUDGE
+    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+#endif
+//return 0;
+ 
+
+
+
+}
+
+
+/*
+ 
+ !!!!!
+ *
+
+ *
+ * ┌───┐   ┌───┬───┬───┬───┐ ┌───┬───┬───┬───┐ ┌───┬───┬───┬───┐ ┌───┬───┬───┐
+ * │Esc│   │ F1│ F2│ F3│ F4│ │ F5│ F6│ F7│ F8│ │ F9│F10│F11│F12│ │P/S│S L│P/B│  ┌┐    ┌┐    ┌┐
+ * └───┘   └───┴───┴───┴───┘ └───┴───┴───┴───┘ └───┴───┴───┴───┘ └───┴───┴───┘  └┘    └┘    └┘
+ * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐ ┌───┬───┬───┐ ┌───┬───┬───┬───┐
+ * │~ `│! 1│@ 2│# 3│$ 4│% 5│^ 6│& 7│* 8│( 9│) 0│_ -│+ =│ BacSp │ │Ins│Hom│PUp│ │Num│ / │ * │ - │
+ * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤ ├───┼───┼───┤ ├───┼───┼───┼───┤
+ * │ Tab │ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │{ [│} ]│ | \ │ │Del│End│PDn│ │ 7 │ 8 │ 9 │   │
+ * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴─────┤ └───┴───┴───┘ ├───┼───┼───┤ + │
+ * │ Caps │ A │ S │ D │ F │ G │ H │ J │ K │ L │: ;│" '│ Enter  │               │ 4 │ 5 │ 6 │   │
+ * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────────┤     ┌───┐     ├───┼───┼───┼───┤
+ * │ Shift  │ Z │ X │ C │ V │ B │ N │ M │< ,│> .│? /│  Shift   │     │ ↑ │     │ 1 │ 2 │ 3 │   │
+ * ├─────┬──┴─┬─┴──┬┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤ ┌───┼───┼───┐ ├───┴───┼───┤ E││
+ * │ Ctrl│ Win│ Alt│         Space         │ Alt│ Win│Menu│Ctrl│ │ ← │ ↓ │ → │ │   0   │ . │←—┘│
+ * └─────┴────┴────┴───────────────────────┴────┴────┴────┴────┘ └───┴───┴───┘ └───────┴───┴───┘
+ */
